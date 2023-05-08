@@ -11,15 +11,16 @@ export default withApiAuthRequired(async function handler(req, res) {
     },
   };
   const fetchBody = {
-    dataSource: process.env.MONGODB_DATA_SOURCE,
+    dataSource: "Cluster0",
     database: "social_butterfly",
     collection: "flutters",
   };
-  const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
+  const baseUrl = 'https://us-east-2.aws.data.mongodb-api.com/app/data-pmwca/endpoint/data/v1/action';
 
   try {
     switch (req.method) {
       case "GET":
+        console.log("****---Get---***");
         const readData = await fetch(`${baseUrl}/find`, {
           ...fetchOptions,
           body: JSON.stringify({
@@ -31,6 +32,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         res.status(200).json(readDataJson.documents);
         break;
       case "POST":
+        console.log("****---Post---***");
         const flutter = req.body;
         const insertData = await fetch(`${baseUrl}/insertOne`, {
           ...fetchOptions,
@@ -40,9 +42,11 @@ export default withApiAuthRequired(async function handler(req, res) {
           }),
         });
         const insertDataJson = await insertData.json();
+        console.log(insertDataJson);
         res.status(200).json(insertDataJson);
         break;
       case "PUT":
+        console.log("****---PUT---***");
         const updateData = await fetch(`${baseUrl}/updateOne`, {
           ...fetchOptions,
           body: JSON.stringify({
@@ -56,9 +60,11 @@ export default withApiAuthRequired(async function handler(req, res) {
           }),
         });
         const updateDataJson = await updateData.json();
+        console.log(updateDataJson);
         res.status(200).json(updateDataJson);
         break;
       case "DELETE":
+        console.log("****---DELETE---***");
         const deleteData = await fetch(`${baseUrl}/deleteOne`, {
           ...fetchOptions,
           body: JSON.stringify({
@@ -67,6 +73,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           }),
         });
         const deleteDataJson = await deleteData.json();
+        console.log(deleteDataJson);
         res.status(200).json(deleteDataJson);
         break;
       default:

@@ -12,17 +12,14 @@ export default function Home() {
   const [flutters, setFlutters] = useState([]);
   const [page, setPage] = useState("Home");
   const setUser = useSetUser();
-
   useEffect(() => {
     (async () => {
       const getUser = await fetch("/api/user");
       const getUserJson = await getUser.json();
       setUser(getUserJson);
-
       const getFlutters = await fetch("/api/flutter");
       const getFluttersJson = await getFlutters.json();
       setFlutters(getFluttersJson);
-
       setIsLoading(false);
     })();
   }, []);
