@@ -9,7 +9,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     const { accessToken } = await getAccessToken(req, res);
     const { user } = await getSession(req, res);
 
-    const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
+    const baseUrl = 'https://us-east-2.aws.data.mongodb-api.com/app/data-pmwca/endpoint/data/v1/action';
 
     switch (req.method) {
       case "GET":

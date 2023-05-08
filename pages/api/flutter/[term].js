@@ -15,11 +15,38 @@ export default withApiAuthRequired(async function handler(req, res) {
     database: "social_butterfly",
     collection: "flutters",
   };
-  const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
+  const baseUrl = 'https://us-east-2.aws.data.mongodb-api.com/app/data-pmwca/endpoint/data/v1/action';
 
   try {
     switch (req.method) {
-      // Add search functionality here
+      case "GET":
+        console.log("******GET******");
+        const term = req.query.term;
+        const readData = await fetch(`${baseUrl}/aggregate`, {
+          ...fetchOptions,
+          body: JSON.stringify({
+            ...fetchBody,
+            pipeline: [
+              {
+                $search: {
+                  index: "default",
+                  text: {
+                    query: term,
+                    path: {
+                      wildcard: "*",
+                    },
+                    fuzzy: {}
+                  },
+                },
+              },
+              { $sort: { postedAt: -1 } },
+            ],
+          }),
+        });
+        const readDataJson = await readData.json();
+        console.log(readDataJson);
+        res.status(200).json(readDataJson.documents);
+        break;
       default:
         res.status(405).end();
         break;
