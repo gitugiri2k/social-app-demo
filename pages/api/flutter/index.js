@@ -4,11 +4,11 @@ export default async function handler(req, res) {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Request-Headers": "*",
-      "api-key": process.env.MONGODB_DATA_API_KEY,
+      "api-key": '8yYVdm9i0n21KHaeQKgNqeHah2bvSoSrJz9Uc7Ftt7MilQWYNYpfVKbJQR7yAhAx',
     },
   };
   const fetchBody = {
-    dataSource: process.env.MONGODB_DATA_SOURCE,
+    dataSource: 'Cluster0',
     database: 'social_butterfly',
     collection: 'flutters',
   };
