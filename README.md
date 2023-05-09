@@ -31,7 +31,7 @@ If you don't already have a [Vercel account](https://vercel.com/signup), create 
 1. Change `AUTH0_BASE_URL` to your custom Vercel domain noted earlier. 
 1. To redeploy, you'll need to make a new commit to the `10-lesson` branch. You can simply open the `README.md` file, add a space somewhere, and make a new commit.
 
-## Task 3: Update Auth0 settings
+## Task 3: Update Auth0 settings 
 
 1. In your Auth0 application, update the following fields under **Settings**:
 - Allowed Callback URLs: `http://localhost:3000/api/auth/callback, https://*.vercel.app/api/auth/callback`
